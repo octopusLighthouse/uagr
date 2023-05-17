@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-export class UserPostReqDto {
+export class FamilyPostReqDto {
 	@ApiProperty()
-	email:string;
+	relation:string;
 
 	@ApiProperty()
-	phone?:string;
+	personsIds: string[];
 }

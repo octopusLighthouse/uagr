@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Pagination } from '../common/pagination';
 import { UserQueryFilterDto } from './dto/request/user.query.filter.dto';
+import { json } from 'express';
 
 export class UserRepository extends Repository<User> {
 	constructor(
@@ -13,21 +14,27 @@ export class UserRepository extends Repository<User> {
 	}
 	
 	async getUser(id: string) {
-		return await this.userRepository.findBy({ id });
+		return await this.userRepository.findOneBy({ id });
 	}
 	
 	async getUsers(
 		pagination: Pagination,
 		filter: UserQueryFilterDto,
 	) {
-		const query = await this.manager
-			.getRepository(User)
+		const query = await this.userRepository
 			.createQueryBuilder('user')
-			.leftJoin('user.salaryMonth', 'salaryMonth');
+			.leftJoinAndSelect('user.persons', 'persons')
+			.leftJoinAndSelect('persons.relations', 'relations')
+			.leftJoinAndSelect('relations.relatedPerson', 'relatedPerson')
+			.getManyAndCount();
 
-		return query.getManyAndCount();
-			// .limit(pagination.getPageSize())
-			// .offset(pagination.getSkip())
+		console.log(`D: ${JSON.stringify(query, null, 2)}`);
+
+		return query;
+
+		// return await query
+		// 	.limit(pagination.getPageSize())
+		// 	.offset(pagination.getSkip())
 			
 	}
 	
@@ -43,10 +50,10 @@ export class UserRepository extends Repository<User> {
 		return await this.userRepository.delete({ id });
 	}
 	
-	async getUser_salaryMonth(id: string) {
+	async getUser_persons(id: string) {
 		return await this.userRepository
 			.createQueryBuilder('user')
-			.innerJoin('user.salarymonth', 'salarymonth')
+			.innerJoin('user.persons', 'persons')
 			.getRawMany();
 	}
 	

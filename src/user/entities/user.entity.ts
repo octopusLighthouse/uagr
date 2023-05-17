@@ -1,6 +1,6 @@
-import { Column, Entity, OneToMany, OneToOne, ManyToOne, ManyToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, OneToMany, OneToOne, ManyToOne, PrimaryColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
-import { SalaryMonth } from 'src/salary-month/entities/salary-month.entity';
+import { Person } from 'src/person/entities/person.entity';
 import * as moment from 'moment';
 
 
@@ -9,19 +9,22 @@ export class User {
 	@PrimaryColumn({ type: 'varchar', length: 255 })
 	id: string;
 
-	@OneToOne(() => SalaryMonth, x => x.user)
-	salaryMonth?: SalaryMonth;
-
 	@Column({ type: 'varchar', length: 255 })
-	name: string;
+	email: string;
+
+	@Column({ type: 'varchar', length: 255, nullable: true })
+	phone?: string;
 
 	@Column({ type: 'timestamp' })
 	createdAt: Date;
 
+	@OneToMany(() => Person, x => x.user)
+	persons: Person[];	
+
 	constructor(data: any) {
 		this.id = data?.id || uuidv4();
-		this.name = data?.name;
-		this.salaryMonth = null;
+		this.email = data?.email;
+		this.phone = data?.phone || null;
 		this.createdAt = data?.createdAt || moment.utc().toDate();
 	}
 }

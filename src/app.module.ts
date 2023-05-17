@@ -3,9 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/entities/user.entity';
-import { SalaryMonth } from './salary-month/entities/salary-month.entity';
+import { Person } from './person/entities/person.entity';
 import { UserModule } from './user/user.module';
-import { SalaryMonthModule } from './salary-month/salary-month.module';
+import { PersonModule } from './person/person.module';
+import { FamilyRelation } from './family/entities/family.entity';
+import { FamilyModule } from './family/family.module';
 require('dotenv').config();
 
 @Module({
@@ -19,13 +21,15 @@ require('dotenv').config();
             database: `${process.env.APP_DB_NAME}`,
             entities: [
 				User,
-				SalaryMonth,
+				Person,
+				FamilyRelation,
 
             ],
             synchronize: true,
         }),
 		UserModule,
-		SalaryMonthModule,
+		PersonModule,
+		FamilyModule,
 
     ],
     controllers: [AppController],

@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
-export class initSalarymonth1684176160241 implements MigrationInterface {
-	name = 'initSalarymonth1684176160241';
+export class initUser1684322389818 implements MigrationInterface {
+	name = 'initUser1684322389818';
 
 	public async up(queryRunner: QueryRunner): Promise<void> {
 		await queryRunner.query(
-			'CREATE TABLE "SalaryMonth" ();'
+			'CREATE TABLE "User" ();'
 		);
 	}
 
