@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { FamilyRelation } from 'src/static/relations';
 export class PersonPostReqDto {
 	@ApiProperty()
 	name:string;
@@ -12,6 +13,15 @@ export class PersonPostReqDto {
 	@ApiProperty()
 	userId: string;
 
+	@ApiProperty({ enum: FamilyRelation, type: FamilyRelation })
+	relationType?: FamilyRelation;
+
 	@ApiProperty()
-	relationType?: string;
+	currentLocation: string;
+
+	@ApiProperty()
+	languages: string[];
+
+	@ApiProperty()
+	qualifications: string[];
 }
