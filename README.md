@@ -1,2 +1,0 @@
-# uagr
-just experimentation
