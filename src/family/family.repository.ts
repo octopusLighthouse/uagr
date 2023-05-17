@@ -14,14 +14,11 @@ export class FamilyRepository extends Repository<FamilyRelation> {
 	}
 	
 	async getPersonsByIds(ids: string[]) {
-		console.log(ids);
 		const p = await this.manager
 			.getRepository(Person)
 			.createQueryBuilder('person')
 			//.where(`id in (:ids)`, { ids })
 			.getMany();
-
-		console.log(JSON.stringify(p, null, 2));
 		return p;
 	}
 

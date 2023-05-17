@@ -46,12 +46,8 @@ export class PersonService {
 		const person = new Person(data);
 		await this.personRepository.createPerson(person);
 
-		console.log(`New person: ${JSON.stringify(person, null, 2)}`);
-		
-
 		if (data.relationType) {
 			const owner = await this.getOne('c30688a9-ee83-4bc3-8cab-90efece3302a');
-			console.log(`Owner: ${JSON.stringify(owner, null, 2)}`);
 
 			// familyRelation.push(new Family({ 
 			// 	relation: data.relation,

@@ -28,7 +28,6 @@ export class UserRepository extends Repository<User> {
 			.leftJoinAndSelect('relations.relatedPerson', 'relatedPerson')
 			.getManyAndCount();
 
-		console.log(`D: ${JSON.stringify(query, null, 2)}`);
 
 		return query;
 

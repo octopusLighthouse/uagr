@@ -44,7 +44,6 @@ export class FamilyService {
 	async createByPersonsIds(data: FamilyPostReqDto) {
 		const persons = await this.familyRepository.getPersonsByIds(data.personsIds);		
 		const family = new FamilyRelation({ ...data, persons: persons });
-		console.log(JSON.stringify(family, null, 2));
 		return await this.familyRepository.createFamily(family);
 	}
 	
