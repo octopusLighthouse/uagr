@@ -6,14 +6,16 @@ import { UserRepository } from './user.repository';
 import { UserPostReqDto } from './dto/request/user.post.dto';
 import { UserQueryDto } from './dto/request/user.query.dto';
 import { Pagination } from '../common/pagination';
+import { EmailService } from 'src/email/email.service';
 
 @Injectable()
 export class UserService {
+	
 	constructor(
 		@InjectRepository(UserRepository)
 		private readonly userRepository: UserRepository,
-	) {
-	}
+		private readonly emailService: EmailService,
+	) {}
 
 	async get(
 		query: UserQueryDto,
@@ -41,6 +43,7 @@ export class UserService {
 	
 	async create(data: UserPostReqDto) {
 		const user = new User(data);
+		await this.emailService.sendMail('robertas.bauras@gmail.com', 'Testas sviestas', this.emailService.template('Robertai'));
 		return await this.userRepository.createUser(user);
 	}
 	

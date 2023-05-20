@@ -8,6 +8,8 @@ import { UserModule } from './user/user.module';
 import { PersonModule } from './person/person.module';
 import { FamilyRelation } from './family/entities/family.entity';
 import { FamilyModule } from './family/family.module';
+import { AuthModule } from './auth/auth.module';
+import { EmailModule } from './email/email.module';
 require('dotenv').config();
 
 @Module({
@@ -30,6 +32,8 @@ require('dotenv').config();
 		UserModule,
 		PersonModule,
 		FamilyModule,
+		AuthModule,
+		EmailModule,
 
     ],
     controllers: [AppController],

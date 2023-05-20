@@ -1,5 +1,5 @@
 {
-  "name": "uagr",
+  "name": "robertasbauras",
   "version": "0.0.1",
   "description": "",
   "author": "Robertas Bauras",
@@ -36,6 +36,7 @@
   "dependencies": {
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/jwt": "^10.0.3",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.3.0",
     "@nestjs/typeorm": "^9.0.1",
@@ -43,6 +44,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "moment": "^2.29.4",
+    "nodemailer": "^6.9.2",
     "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
